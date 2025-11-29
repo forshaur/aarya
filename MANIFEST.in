@@ -1,0 +1,5 @@
+recursive-include src/aarya/modules *.py
+include LICENSE
+include README.md
+exclude *.pyc
+exclude __pycache__/*

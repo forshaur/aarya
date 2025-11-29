@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aarya"
+version = "1.0.0"
+description = "Advanced OSINT Email Scanner with Async & Browser Automation"
+readme = "README.md"
+authors = [
+  { name = "Shaurya Mishra", email = "shaur.codes@gmail.com" }, 
+]
+license = { file = "LICENSE" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Security",
+    "Topic :: Utilities",
+    "Intended Audience :: Information Technology"
+]
+dependencies = [
+    "httpx",
+    "requests",
+    "beautifulsoup4",
+    "playwright",
+    "browser_cookie3",
+    "rich"
+]
+requires-python = ">=3.8"
+
+[project.urls]
+"Homepage" = "https://github.com/forshaur/aarya"
+"Bug Tracker" = "https://github.com/forshaur/aarya/issues"
+
+# This creates the 'aarya' command in the terminal
+[project.scripts]
+aarya = "aarya.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
