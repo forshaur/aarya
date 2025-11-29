@@ -20,18 +20,18 @@ async def site(email, client):
     }
 
     try:
-        # --- 1. GET TOKEN ---
+        # GET TOKEN 
         freq = await client.get("https://www.instagram.com/accounts/emailsignup/", headers=headers)
 
-        # *** 429 CHECK FOR GET REQUEST ***
+        # 429 CHECK FOR GET REQUEST 
         if freq.status_code == 429:
-            wait_seconds = int(freq.headers.get("Retry-After", 60)) # Default to 60s
+            wait_seconds = int(freq.headers.get("Retry-After", 60)) 
             print(f"[!] 429 on GET request. Waiting for {wait_seconds} seconds...")
             await asyncio.sleep(wait_seconds)
             # Retry the request once
             freq = await client.get("https://www.instagram.com/accounts/emailsignup/", headers=headers)
         
-        # If it *still* fails, raise an error
+        # If it still fails, raise an error
         if freq.status_code != 200:
             raise httpx.HTTPStatusError(f"Failed to get page: {freq.status_code}", request=freq.request, response=freq)
 
@@ -44,7 +44,7 @@ async def site(email, client):
                     "rateLimit": True, "exists": False, "emailrecovery": None,
                     "phoneNumber": None, "others": f"Token Error: {str(e)}"}
 
-    # --- 2. POST DATA ---
+    # POST DATA 
     data = {
         'email': email,
         'username': ''.join(random.choice(string.ascii_lowercase + string.digits) for i in range(random.randint(6, 30))),
@@ -63,7 +63,7 @@ async def site(email, client):
             data=data, headers=headers
         )
 
-        # *** 429 CHECK FOR POST REQUEST ***
+        # 429 CHECK FOR POST REQUEST 
         if check_req.status_code == 429:
             wait_seconds = int(check_req.headers.get("Retry-After", 60))
             print(f"[!] 429 on POST request. Waiting for {wait_seconds} seconds...")
@@ -74,7 +74,7 @@ async def site(email, client):
                 data=data, headers=headers
             )
         
-        # If it's *still* 429, fail gracefully
+        # If it's still 429, fail gracefully
         if check_req.status_code == 429:
              return {"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
                     "rateLimit": True, "exists": False, "emailrecovery": None,
@@ -82,7 +82,7 @@ async def site(email, client):
 
         check = check_req.json()
         
-        # --- 3. ANALYZE RESPONSE (Your logic) ---
+        # ANALYZE RESPONSE 
         if check.get("status") != "fail":
             if 'errors' in check and 'email' in check["errors"]:
                 error_code = check["errors"]["email"][0]["code"]

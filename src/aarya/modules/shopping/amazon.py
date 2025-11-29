@@ -40,7 +40,6 @@ async def site(email, client):
         req = await client.post('https://www.amazon.com/ap/signin/', data=data, headers=headers)
         body = BeautifulSoup(req.text, 'html.parser')
 
-        # --- LOGIC FIX START ---
         
         # CASE 1: Account Exists (Password Missing Alert)
         if body.find("div", {"id": "auth-password-missing-alert"}):
@@ -65,8 +64,6 @@ async def site(email, client):
                 "rateLimit": True, "exists": False, "emailrecovery": None, "phoneNumber": None, 
                 "others": "Captcha/Layout Change Detected"
             }
-
-        # --- LOGIC FIX END ---
 
     except Exception as e:
         return {

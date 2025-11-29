@@ -3,6 +3,7 @@ import argparse
 import json
 import re
 import sys
+
 from rich.console import Console
 from rich.table import Table
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TimeElapsedColumn
@@ -10,7 +11,6 @@ from rich import box
 from rich.rule import Rule
 from rich.panel import Panel
 
-# Import your modules
 import modules.shopping.flipkart as flipkart
 import modules.shopping.amazon as amazon
 import modules.learning.duolingo as duolingo
@@ -20,7 +20,6 @@ import modules.social.twitter as twitter
 import modules.social.wattpad as wattpad
 import modules.mail.gmail as gmail
 import modules.mail.proton as proton
-import modules.funding.buymeacoffee as buymeacoffee
 
 console = Console()
 
@@ -29,7 +28,7 @@ MODS = [
     instagram, twitter, wattpad, gmail, proton
 ]
 
-# Vibrant, Cyberpunk-style Logo
+
 LOGO = """[bold bright_cyan]
 ┏━┓┏━┓┏━┓╻ ╻┏━┓
 ┣━┫┣━┫┣┳┛┗┳┛┣━┫
@@ -68,7 +67,7 @@ async def check_service(mod, email, client, progress, task_id, table, detailed_f
 
         if exists:
             status_text = "FOUND"
-            status_style = "bold green"  # <--- Vibrant Bold Green
+            status_style = "bold green" 
             
             if name.lower() == "google":
                 detailed_findings.append({"module": "Google", "data": others, "type": "google"})
@@ -83,11 +82,11 @@ async def check_service(mod, email, client, progress, task_id, table, detailed_f
 
         elif rate_limit:
             status_text = "RATE LIMIT"
-            status_style = "bold yellow" # <--- Vibrant Bold Yellow
+            status_style = "bold yellow" 
             table_details = "[yellow]Request throttled[/yellow]"
         elif others and ("Error" in str(others) or "Timeout" in str(others)):
             status_text = "ERROR"
-            status_style = "bold red"    # <--- Vibrant Bold Red
+            status_style = "bold red"    
             table_details = "[red]Module Error[/red]"
         else:
             status_text = "NOT FOUND"
@@ -111,7 +110,6 @@ def print_intelligence_report(findings):
         return
 
     console.print()
-    # Neon Style Rule
     console.print(Rule("[bold magenta]Intelligence Report[/bold magenta]"))
     console.print()
 
@@ -125,7 +123,6 @@ def print_intelligence_report(findings):
             maps_url = data.get("Maps", "N/A")
             pic_url = data.get("Pic", "N/A")
 
-            # High contrast keys and values
             console.print(f"[bold bright_cyan]target@{module}[/bold bright_cyan]")
             console.print(f" ├─ [bold white]Full Name:[/bold white]  [bold yellow]{name}[/bold yellow]")
             console.print(f" ├─ [bold white]Gaia ID:[/bold white]    [cyan]{gaia_id}[/cyan]")
@@ -147,7 +144,6 @@ async def run_scan(email):
     console.print(LOGO)
     console.print(f"\n[bold white]Target:[/bold white] [bold cyan]{email}[/bold cyan]\n")
 
-    # Header style set to bold magenta (Neon Pink) for high contrast
     table = Table(box=box.SIMPLE, show_header=True, header_style="bold magenta", expand=True)
     table.add_column("Service", style="bold cyan", width=15)
     table.add_column("Status", width=12)
@@ -159,9 +155,9 @@ async def run_scan(email):
     import httpx
     async with httpx.AsyncClient(timeout=30.0) as cl:
         with Progress(
-            SpinnerColumn(style="bold cyan"), # Colored Spinner
+            SpinnerColumn(style="bold cyan"),   
             TextColumn("[bold cyan]{task.description}[/bold cyan]"),
-            BarColumn(bar_width=None, complete_style="magenta", finished_style="green"), # Vibrant Progress Bar
+            BarColumn(bar_width=None, complete_style="magenta", finished_style="green"), 
             TimeElapsedColumn(),
             transient=True
         ) as progress:
