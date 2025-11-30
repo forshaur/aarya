@@ -3,6 +3,7 @@ import argparse
 import json
 import re
 import sys
+from importlib.metadata import version, PackageNotFoundError
 
 from rich.console import Console
 from rich.table import Table
@@ -28,14 +29,19 @@ MODS = [
     instagram, twitter, wattpad, gmail, proton
 ]
 
+try:
+    __version__ = version("aarya")
+except PackageNotFoundError:
+    # if we run the script locally
+    __version__ = "dev"
 
-LOGO = """[bold bright_cyan]
+LOGO = f"""[bold bright_cyan]
 ┏━┓┏━┓┏━┓╻ ╻┏━┓
 ┣━┫┣━┫┣┳┛┗┳┛┣━┫
 ╹ ╹╹ ╹╹┗╸ ╹ ╹ ╹[white][dim] | The Advanced OSINT Email Scanner[/dim][white]
 [/bold bright_cyan]
 [white]GitHub: [link=https://github.com/forshaur]forshaur[/link][white] | X: @forshaur
-Version: [bold bright_cyan]1.0.0[/bold bright_cyan]"""
+Version: [bold bright_cyan]{__version__}[/bold bright_cyan]"""
 
 def is_valid(email):
     pat = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
