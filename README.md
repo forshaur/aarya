@@ -9,7 +9,7 @@ Aarya is an OSINT tool that validates the existence of email addresses across so
 * It leverages **Asynchronous HTTP Requests (httpx)** to perform lightning-fast, concurrent checks without the overhead of a web browser.
 * It silently verifies accounts using "Forgot Password" APIs, registration endpoints, and public profile scrapes.
 
-![Aarya Demo](https://raw.githubusercontent.com/forshaur/aarya/main/aarya.png)
+![Aarya Demo](https://raw.githubusercontent.com/forshaur/aarya/main/gimp.png)
 
 ## 🚀 Features
 
@@ -56,7 +56,17 @@ In fraud investigations, account age acts as a trust signal. An email address li
 
 ## 📦 Installation
 
+* create a virtual environment first (optional but recommended if using linux)
 ```bash
+# for linux users
+python -m venv .venv
+source .venv/bin/activate
+pip install aarya
+```
+``` bash
+# for windows users
+python -m venv .venv
+.venv\Scripts\activate
 pip install aarya
 ```
 
