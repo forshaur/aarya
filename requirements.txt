@@ -1,5 +1,4 @@
 httpx
 requests
 beautifulsoup4
-playwright
 browser_cookie3
