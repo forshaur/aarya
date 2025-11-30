@@ -1,4 +1,4 @@
-from shared import utils
+from aarya.shared import utils
 import re
 from datetime import datetime
 async def site(email, client):

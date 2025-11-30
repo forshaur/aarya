@@ -1,4 +1,4 @@
-from shared import utils
+from aarya.shared import utils
 
 async def site(email,client):
     name = "spotify"

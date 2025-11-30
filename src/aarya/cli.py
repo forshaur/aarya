@@ -11,15 +11,15 @@ from rich import box
 from rich.rule import Rule
 from rich.panel import Panel
 
-import modules.shopping.flipkart as flipkart
-import modules.shopping.amazon as amazon
-import modules.learning.duolingo as duolingo
-import modules.music.spotify as spotify
-import modules.social.instagram as instagram
-import modules.social.twitter as twitter
-import modules.social.wattpad as wattpad
-import modules.mail.gmail as gmail
-import modules.mail.proton as proton
+import aarya.modules.shopping.flipkart as flipkart
+import aarya.modules.shopping.amazon as amazon
+import aarya.modules.learning.duolingo as duolingo
+import aarya.modules.music.spotify as spotify
+import aarya.modules.social.instagram as instagram
+import aarya.modules.social.twitter as twitter
+import aarya.modules.social.wattpad as wattpad
+import aarya.modules.mail.gmail as gmail
+import aarya.modules.mail.proton as proton
 
 console = Console()
 

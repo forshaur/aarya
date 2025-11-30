@@ -1,4 +1,4 @@
-from shared import utils
+from aarya.shared import utils
 from bs4 import BeautifulSoup
 
 async def site(email, client):

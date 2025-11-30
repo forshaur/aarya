@@ -2,7 +2,7 @@ import asyncio
 import httpx
 import random
 import string
-from shared import utils
+from aarya.shared import utils
 
 async def site(email, client):
     name = "instagram"

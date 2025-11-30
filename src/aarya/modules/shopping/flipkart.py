@@ -1,4 +1,4 @@
-from shared import utils
+from aarya.shared import utils
 import random
 import re
 
