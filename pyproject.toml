@@ -17,7 +17,6 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Security",
     "Topic :: Utilities",
-    "Topic :: OSINT",
     "Intended Audience :: Information Technology"
 ]
 dependencies = [
