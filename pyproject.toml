@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "aarya"
 version = "1.0.0"
-description = "Advanced OSINT Email Scanner with Async & Browser Automation"
+description = "Advanced OSINT Email Scanner using Async HTTP"  # <--- FIXED
 readme = "README.md"
 authors = [
   { name = "Shaurya Mishra", email = "shaur.codes@gmail.com" }, 
@@ -17,13 +17,13 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Security",
     "Topic :: Utilities",
+    "Topic :: OSINT",
     "Intended Audience :: Information Technology"
 ]
 dependencies = [
     "httpx",
     "requests",
     "beautifulsoup4",
-    "playwright",
     "browser_cookie3",
     "rich"
 ]
@@ -33,7 +33,6 @@ requires-python = ">=3.8"
 "Homepage" = "https://github.com/forshaur/aarya"
 "Bug Tracker" = "https://github.com/forshaur/aarya/issues"
 
-# This creates the 'aarya' command in the terminal
 [project.scripts]
 aarya = "aarya.cli:main"
 
