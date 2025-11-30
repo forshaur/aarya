@@ -3,7 +3,6 @@ import re
 import asyncio
 
 def generate_flipkart_headers(user_agent: str) -> dict:    
-    # Simplified headers to reduce fingerprinting mismatches
     headers = {
         'User-Agent': user_agent,
         'Accept': 'application/json, text/plain, */*',
@@ -21,7 +20,7 @@ async def site(email: str, client):
     name = "flipkart"
     domain = "flipkart.com"
     method = "login"
-    frequent_rate_limit = True  # Changed to True as Flipkart is strict
+    frequent_rate_limit = True  
 
     headers = generate_flipkart_headers(utils.get_random_user_agent())
     
@@ -45,7 +44,7 @@ async def site(email: str, client):
             url_to_try = base_api_url.format(dc_id='2')
             response = await client.post(url_to_try, json=payload, headers=headers, timeout=10)
 
-        # --- ANALYSIS LOGIC ---
+        
         if response.status_code == 200:
             data = response.json()
             user_details = data.get('RESPONSE', {}).get('userDetails', {})
