@@ -24,7 +24,7 @@ Aarya is an OSINT tool that validates the existence of email addresses across so
 | Feature | Holehe | Aarya |
 | :--- | :--- | :--- |
 | **Primary Output** | Email Existence (True/False) | **Identity Intelligence** (Real Names, Photos, Maps Reviews) |
-| **Reliability** | Prone to False Negatives | **High** (Explicitly detects Rate Limits vs. Not Found) |
+| **Reliability** | Prone to False Negatives and >50% modules **don't work** | **High** (Explicitly detects Rate Limits vs. Not Found) |
 | **Stealth** | Static Headers | **Dynamic** (Auto-fetches latest User-Agents) |
 | **Focus** | Quantity (120+ Sites) | **Quality** (Deep scans of High-Value Targets) |
 | **UI/UX** | Basic CLI | **Modern** (Rich Tables, Clickable Links, Summary Panels) |
