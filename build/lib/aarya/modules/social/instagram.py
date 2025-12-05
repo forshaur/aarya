@@ -37,8 +37,10 @@ async def site(email, client):
 
         token = freq.cookies.get("csrftoken")
         
-        if not token:# Fallback extraction if cookie is missing (Regex/Split)
-            try:# Attempt to find csrf_token in the HTML window._sharedData or embedded script
+        if not token:
+            # Fallback extraction if cookie is missing (Regex/Split)
+            try:
+                # Attempt to find csrf_token in the HTML window._sharedData or embedded script
                 token = freq.text.split('csrf_token":"')[1].split('"')[0]
             except:
                 return {"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,

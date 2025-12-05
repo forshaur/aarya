@@ -1,0 +1,33 @@
+
+async def site(email, client):
+    name = "twitter"
+    domain = "twitter.com"
+    method = "register"
+    frequent_rate_limit=False
+
+    try:
+        req = await client.get(
+            "https://api.twitter.com/i/users/email_available.json",
+            params={
+                "email": email})
+        if req.json()["taken"]:
+            return {"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
+                        "rateLimit": False,
+                        "exists": True,
+                        "emailrecovery": None,
+                        "phoneNumber": None,
+                        "others": None}
+        else:
+            return {"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
+                        "rateLimit": False,
+                        "exists": False,
+                        "emailrecovery": None,
+                        "phoneNumber": None,
+                        "others": None}
+    except Exception:
+        return {"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
+                    "rateLimit": True,
+                    "exists": False,
+                    "emailrecovery": None,
+                    "phoneNumber": None,
+                    "others": None}

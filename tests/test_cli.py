@@ -4,12 +4,12 @@ from aarya.cli import is_valid, run_scan
 
 @pytest.mark.asyncio
 async def test_is_valid():
-    assert is_valid("test@example.com") is True
+    assert is_valid("whiteroseeee@proton.me") is True
     assert is_valid("invalid-email") is False
 
 @pytest.mark.asyncio
 async def test_run_scan(mocker):
-    mock_email = "test@example.com"
+    mock_email = "whiteroseeee@proton.me"
     mock_response = [{"name": "Service1", "exists": True}, {"name": "Service2", "exists": False}]
     
     # Mock the check function to return a predefined response

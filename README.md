@@ -18,17 +18,43 @@ Aarya is an OSINT tool that validates the existence of email addresses across so
 * **Smart Stealth:** Automatically fetches the latest real-world **User-Agents** from the web to bypass simple bot detection filters.
 * **Elegant UI:** Professional, minimalist CLI design with responsive tables and clean link wrapping.
 
-## 🆚 Aarya vs. Holehe
-#### During development of this tool I came to know that another great tool was already there which was similar to Aarya.
-### here is why Aarya outperforms.
-| Feature | Holehe | Aarya |
-| :--- | :--- | :--- |
-| **Primary Output** | Email Existence (True/False) | **Identity Intelligence** (Real Names, Photos, Maps Reviews) |
-| **Reliability** | Prone to False Negatives and >50% modules **don't work** | **High** (Explicitly detects Rate Limits vs. Not Found) |
-| **Stealth** | Static Headers | **Dynamic** (Auto-fetches latest User-Agents) |
-| **Focus** | Quantity (120+ Sites) | **Quality** (Deep scans of High-Value Targets) |
-| **UI/UX** | Basic CLI | **Modern** (Rich Tables, Clickable Links, Summary Panels) |
 
+## 📦 Installation
+
+### Option 1: Install via PyPI (Recommended)
+It is recommended to use a virtual environment to prevent conflicts.
+
+**Linux/macOS:**
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install aarya
+```
+
+**Windows:**
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install aarya
+```
+
+### Option 2: Install from Source (Development)
+If you want the latest features or updates directly from the repository:
+```bash
+git clone https://github.com/forshaur/aarya.git
+cd aarya
+pip install .
+```
+
+# 🛠 Usage
+### Basic Scan:
+```bash 
+aarya target@example.com
+```
+### Save Results:
+```bash 
+aarya target@example.com -o results.json
+```
 
 ## 🔍 Use Cases in Recon & Intel
 
@@ -53,40 +79,20 @@ Aarya acts as a signpost for deeper investigation. A confirmed **Google** accoun
 ### 7. Credibility Analysis (Anti-Fraud)
 In fraud investigations, account age acts as a trust signal. An email address linked to a **ProtonMail** key created 3 years ago or a **Google** account with Maps contributions from 2019 is far more likely to be legitimate than a "fresh" email with absolutely no digital footprint.
 
+## 🆚 Aarya vs. Holehe
+#### During development of this tool I came to know that another great tool was already there which was similar to Aarya.
+### here is why Aarya outperforms.
+| Feature | Holehe | Aarya |
+| :--- | :--- | :--- |
+| **Primary Output** | Email Existence (True/False) | **Identity Intelligence** (Real Names, Photos, Maps Reviews) |
+| **Reliability** | Prone to False Negatives and >50% modules **don't work** | **High** (Explicitly detects Rate Limits vs. Not Found) |
+| **Stealth** | Static Headers | **Dynamic** (Auto-fetches latest User-Agents) |
+| **Focus** | Quantity (120+ Sites) | **Quality** (Deep scans of High-Value Targets) |
+| **UI/UX** | Basic CLI | **Modern** (Rich Tables, Clickable Links, Summary Panels) |
 
-## 📦 Installation
 
-* create a virtual environment first (optional but recommended if using linux)
-```bash
-# for linux users
-python -m venv .venv
-source .venv/bin/activate
-pip install aarya
-```
-``` bash
-# for windows users
-python -m venv .venv
-.venv\Scripts\activate
-pip install aarya
-```
 
-# 🛠 Usage
-### Basic Scan:
-```bash 
-aarya target@example.com
-```
-### Save Results:
-```bash 
-aarya target@example.com -o results.json
-```
 
-## 🧩 Supported Platforms
-Aarya currently performs deep scans on the following high-value services:
-* **Social:** Instagram, Twitter (X), Wattpad, About.me
-* **Shopping:** Amazon, Flipkart
-* **Music & Learning:** Spotify, Duolingo
-* **Mail:** Gmail (Advanced), ProtonMail
-* More platforms to be added soon...
 ## ⚠️ Disclaimer
 **Aarya is designed for educational purposes, authorized security research, and personal digital footprint analysis only.**
 
