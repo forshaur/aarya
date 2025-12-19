@@ -38,7 +38,7 @@ except PackageNotFoundError:
 LOGO = f"""[bold bright_cyan]
 ┏━┓┏━┓┏━┓╻ ╻┏━┓
 ┣━┫┣━┫┣┳┛┗┳┛┣━┫
-╹ ╹╹ ╹╹┗╸ ╹ ╹ ╹[white][dim] | The Advanced OSINT Email Scanner[/dim][white]
+╹ ╹╹ ╹╹┗╸ ╹ ╹ ╹[white][dim] | Email to digital footprint[/dim][white]
 [/bold bright_cyan]
 [white]GitHub: [link=https://github.com/forshaur]forshaur[/link][white] | X: @forshaur
 Version: [bold bright_cyan]{__version__}[/bold bright_cyan]"""
