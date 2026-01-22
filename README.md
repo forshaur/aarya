@@ -58,6 +58,15 @@ aarya target@example.com
 ```bash 
 aarya target@example.com -o results.json
 ```
+## Star History
+
+<a href="https://www.star-history.com/#forshaur/aarya&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=forshaur/aarya&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=forshaur/aarya&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=forshaur/aarya&type=date&legend=top-left" />
+ </picture>
+</a>
 
 ## 🔍 Use Cases in Recon & Intel
 
@@ -99,3 +108,5 @@ Contributions are welcome! If you want to add a new module (e.g., Pinterest, Ado
 
 ## 📜 License
 This project is licensed under the **GNU General Public License v3.0**. See the [LICENSE](LICENSE) file for details.
+
+
