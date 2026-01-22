@@ -1,13 +1,12 @@
 # Aarya (आर्य)
-> **The Advanced OSINT Email Scanner**
+> **Email address to digital footprint for OSINT**
 
 [![PyPI version](https://badge.fury.io/py/aarya.svg)](https://badge.fury.io/py/aarya)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/aarya?period=total&units=NONE&left_color=GREY&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/aarya)
 
-Aarya is an OSINT tool that validates the existence of email addresses across social media, shopping, and professional platforms (e.g. Instagram, Amazon, Spotify).
+Aarya is an OSINT tool that validates the existence of email addresses across social media, shopping, and professional platforms (e.g. Instagram, Amazon, Spotify) and extracts rich metadata like Google Map contributions, reviews and account creation dates for proton mail.
 
-* It leverages **Asynchronous HTTP Requests (httpx)** to perform lightning-fast, concurrent checks without the overhead of a web browser.
-* It silently verifies accounts using "Forgot Password" APIs, registration endpoints, and public profile scrapes.
 
 ![Aarya Demo](https://raw.githubusercontent.com/forshaur/aarya/refs/heads/main/src/aarya/gimp.png)
 
@@ -18,6 +17,10 @@ Aarya is an OSINT tool that validates the existence of email addresses across so
 * **Smart Stealth:** Automatically fetches the latest real-world **User-Agents** from the web to bypass simple bot detection filters.
 * **Elegant UI:** Professional, minimalist CLI design with responsive tables and clean link wrapping.
 
+## ⚠️ Disclaimer
+**Aarya is designed for educational purposes, authorized security research, and personal digital footprint analysis only.**
+
+The developers are not responsible for any misuse of this tool. Scanning email addresses that do not belong to you or without the owner's explicit consent may violate privacy laws or platform Terms of Service in your jurisdiction. Use responsibly.
 
 ## 📦 Installation
 
@@ -90,13 +93,6 @@ In fraud investigations, account age acts as a trust signal. An email address li
 | **Focus** | Quantity (120+ Sites) | **Quality** (Deep scans of High-Value Targets) |
 | **UI/UX** | Basic CLI | **Modern** (Rich Tables, Clickable Links, Summary Panels) |
 
-
-
-
-## ⚠️ Disclaimer
-**Aarya is designed for educational purposes, authorized security research, and personal digital footprint analysis only.**
-
-The developers are not responsible for any misuse of this tool. Scanning email addresses that do not belong to you or without the owner's explicit consent may violate privacy laws or platform Terms of Service in your jurisdiction. Use responsibly.
 
 ## 🤝 Contributing
 Contributions are welcome! If you want to add a new module (e.g., Pinterest, Adobe), please fork the repository and submit a Pull Request.
