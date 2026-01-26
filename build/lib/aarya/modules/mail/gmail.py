@@ -9,7 +9,11 @@ import sys
 
 ORIGIN = "https://mail.google.com"
 API_URL = "https://peoplestack-pa.clients6.google.com/$rpc/peoplestack.PeopleStackAutocompleteService/Autocomplete"
-API_KEY = "AIzaSyBm7aDMG9actsWSlx-MvrYsepwdnLgz69I"
+API_KEY = "AIzaSyBm7aDMG9actsWSlx-MvrYsepwdnLgz69I" # this API key is public client identifier for google's web interface
+                                                    # it is same for everyone, to get this key follow the steps mentioned below
+# login to gmail, open developer tools, go to networks tab. compose a new email, type an email in the reciever's section
+# once you're done, search for "AIza" in the search box.
+
 
 def get_cookies_robust():
     """
