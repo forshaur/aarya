@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aarya"
-version = "1.0.7"
+version = "1.0.8"
 description = "Validates the existence of registered accounts across social & shopping platforms and extracts rich identity intelligence (Names, Photos, IDs)."
 readme = "README.md"
 authors = [
