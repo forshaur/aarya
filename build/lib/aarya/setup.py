@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='aarya',
-    version='1.0.6',
+    version='1.0.8',
     
     # This tells Python your code is inside the 'src' folder
     packages=find_packages(where="src"),
