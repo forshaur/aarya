@@ -59,29 +59,6 @@ aarya target@example.com
 aarya target@example.com -o results.json
 ```
 
-## 🔍 Use Cases in Recon & Intel
-
-### 1. Verification & Validation
-Confirm if a target email is active. A "ghost" email (no accounts anywhere) is a high-risk indicator for fraud or burner accounts, whereas an email with established accounts verifies the identity exists.
-
-### 2. Social Engineering Context
-Aarya helps Red Teamers map the digital footprint of a target. Knowing a target uses Duolingo or Wattpad allows for highly tailored phishing pretexts (e.g., "Your Duolingo streak is in danger" vs generic corporate emails).
-
-### 3. Identity Correlation
-By extracting unique identifiers like the **Google Gaia ID** or **ProtonMail public key date**, Aarya helps correlate an email address with real-world timelines, locations, and other digital identities across the web.
-
-### 4. Credibility of Credential Reuse (Post-Exploitation)
-If a target's password is compromised (via phishing or a data breach) for one verified platform, Aarya provides a precise roadmap of *other* active services where that same password might be reused, highlighting critical risks for credential stuffing attacks.
-
-### 5. Corporate OpSec Auditing
-Security teams can scan corporate email domains to detect "Shadow IT" or policy violations. Discovering that an employee used their official `name@company.com` address to sign up for **Instagram** or **Amazon** highlights potential attack surfaces and credential leakage risks.
-
-### 6. OSINT Pivot Points
-Aarya acts as a signpost for deeper investigation. A confirmed **Google** account signals an investigator to search for public Maps reviews or Photos. A confirmed **Instagram** account invites a search for public profile associated with that email. The tool identifies *where* to look next for public data.
-
-### 7. Credibility Analysis (Anti-Fraud)
-In fraud investigations, account age acts as a trust signal. An email address linked to a **ProtonMail** key created 3 years ago or a **Google** account with Maps contributions from 2019 is far more likely to be legitimate than a "fresh" email with absolutely no digital footprint.
-
 ## 🆚 Aarya vs. Holehe
 #### During development of this tool I came to know that another great tool was already there which was similar to Aarya.
 ### here is why Aarya outperforms.
@@ -99,5 +76,9 @@ Contributions are welcome! If you want to add a new module (e.g., Pinterest, Ado
 
 ## 📜 License
 This project is licensed under the **GNU General Public License v3.0**. See the [LICENSE](LICENSE) file for details.
+
+## Other projects by me
+[Adyant](https://github.com/forshaur/adyant) - Markov-chain based wordlist generator for URL path discovery.
+> No matter how big a wordlist is, it's usually top-n segments from that wordlist. adyant helps you look for those rare paths without creating much noise. Quickly.
 
 
