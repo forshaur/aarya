@@ -1,113 +1,83 @@
-import asyncio
-import httpx
-import random
+import json
 from aarya.shared import utils
 
 async def site(email, client):
     name = "instagram"
     domain = "instagram.com"
     method = "recovery"
-    frequent_rate_limit = True
+    frequent_rate_limit = False
 
-    headers = {
-        'User-Agent': utils.get_random_user_agent(),
-        'Accept': '*/*',
-        'Accept-Language': 'en-GB,en;q=0.6',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'X-IG-App-ID': '936619743392459',
-        'X-ASBD-ID': '359341',
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-Instagram-Ajax': '1', 
-        'Origin': 'https://www.instagram.com',
-        'Referer': 'https://www.instagram.com/accounts/password/reset/',
-        'Sec-Fetch-Dest': 'empty',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'same-origin',
-        'Priority': 'u=1, i',
-    }
+    import urllib.parse
+    import asyncio
+    encoded_email = urllib.parse.quote(email, safe='')
 
-    try:
-        # 2. GET CSRF Token from the Password Reset page
-        # This is necessary because we need a valid session/csrf cookie to send the POST
-        freq = await client.get("https://www.instagram.com/accounts/password/reset/", headers=headers)
-        
-        if freq.status_code == 429:
-             return {"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                    "rateLimit": True, "exists": False, "others": "Initial 429 Block"}
-
-        token = freq.cookies.get("csrftoken")
-        
-        if not token:# Fallback extraction if cookie is missing (Regex/Split)
-            try:# Attempt to find csrf_token in the HTML window._sharedData or embedded script
-                token = freq.text.split('csrf_token":"')[1].split('"')[0]
-            except:
-                return {"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                        "rateLimit": True, "exists": False, "others": "CSRF Token Missing"}
-
-    except Exception as e:
-        return {"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                "rateLimit": True, "exists": False, "others": f"Init Error: {str(e)}"}
-
-    # 3. POST to Recovery Endpoint
-    # We update headers with the token we just grabbed
-    headers["X-CSRFToken"] = token
-    
-    data = {
-        'email_or_username': email,
-        # 'recaptcha_challenge_field': '' # Only needed if IG triggers a captcha challenge
-    }
+    curl_cmd = f"""curl -s 'https://www.instagram.com/api/graphql' \
+  --compressed \
+  -X POST \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:151.0) Gecko/20100101 Firefox/151.0' \
+  -H 'Accept: */*' \
+  -H 'Accept-Language: en-US,en;q=0.9' \
+  -H 'Accept-Encoding: gzip, deflate, br, zstd' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'X-FB-Friendly-Name: CAAIGAccountSearchViewQuery' \
+  -H 'X-CSRFToken: oXrMxL_C2FSc-Vu448HYJK' \
+  -H 'X-IG-App-ID: 936619743392459' \
+  -H 'X-IG-Max-Touch-Points: 0' \
+  -H 'X-FB-LSD: AdRcDkTe92_OKZ2PfhReOaqjwgg' \
+  -H 'X-ASBD-ID: 359341' \
+  -H 'Origin: https://www.instagram.com' \
+  -H 'Sec-GPC: 1' \
+  -H 'Connection: keep-alive' \
+  -H 'Referer: https://www.instagram.com/accounts/password/reset/' \
+  -H 'Cookie: csrftoken=oXrMxL_C2FSc-Vu448HYJK; datr=GwFqaoOQX-_dZnItC0HBFAGO; ig_did=2F4EA602-C56F-4FBD-9855-287970F150C0; wd=958x935; mid=amoBGwAEAAHlVz9ipKvuVhl1P6tm' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'Priority: u=0' \
+  -H 'TE: trailers' \
+  --data-raw 'av=0&__d=www&__user=0&__a=1&__req=1c&lsd=AdRcDkTe92_OKZ2PfhReOaqjwgg&__crn=comet.igweb.PolarisCAAIGAccountRecoverySearchRoute&fb_api_caller_class=RelayModern&fb_api_req_friendly_name=CAAIGAccountSearchViewQuery&server_timestamps=true&variables=%7B%22params%22%3A%7B%22search_query%22%3A%22{encoded_email}%22%7D%7D&doc_id=36716895674620546'"""
 
     try:
-        check_req = await client.post(
-            "https://www.instagram.com/api/v1/web/accounts/account_recovery_send_ajax/",
-            data=data,
-            headers=headers,
-            cookies=freq.cookies # Crucial: Pass the session cookies from the initial GET
+        proc = await asyncio.create_subprocess_shell(
+            curl_cmd,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE
         )
+        stdout, _ = await proc.communicate()
         
-        if check_req.status_code == 429:
-             return {"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                    "rateLimit": True, "exists": False, "others": "429 Rate Limit"}
+        if not stdout:
+            return {"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
+                    "rateLimit": True, "exists": False, "others": "Empty Response"}
 
-        try:
-            check = check_req.json()
-        except:
-             return {"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                    "rateLimit": True, "exists": False, "others": "Invalid JSON Response"}
+        check = json.loads(stdout.decode('utf-8'))
         
-        # --- ANALYSIS LOGIC ---
+        data_block = check.get("data", {}).get("caa_ar_ig_account_search")
         
-        # Case 1: Account Does NOT Exist
-        # Response: {"message":"No users found","status":"fail"}
-        if check.get("status") == "fail" and "No users found" in check.get("message", ""):
-            return {
-                "name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                "rateLimit": False, "exists": False, "emailrecovery": None, "phoneNumber": None, "others": None
-            }
-
-        # Case 2: Account Exists (Email Sent)
-        # Response: {"title": "Email sent", "status":"ok", ...}
-        if check.get("status") == "ok":
-            # Optional: Extract partial email from response if available
-            # recovery_email = check.get("contact_point", None) 
+        if data_block is None:
              return {
+                 "name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
+                 "rateLimit": False, "exists": False, "emailrecovery": None, "phoneNumber": None, "others": None
+             }
+        
+        profiles = data_block.get("profiles", [])
+        contact_points = data_block.get("contact_points", [])
+        
+        if profiles or contact_points:
+            return {
                 "name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
                 "rateLimit": False, "exists": True, "emailrecovery": None, "phoneNumber": None, "others": None
             }
             
-        # Case 3: Rate Limit / Soft Block
-        msg = check.get("message", "").lower()
-        if "wait" in msg or "spam" in msg or "limit" in msg:
-             return {
-                "name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                "rateLimit": True, "exists": False, "others": "Soft Block"
-            }
+        error_content = data_block.get("error_content")
+        if error_content and "Something went wrong" in error_content.get("description", ""):
+             return {"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
+                    "rateLimit": True, "exists": False, "others": "Soft Block"}
 
-        # Case 4: Other Failures
-        return {
-            "name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-            "rateLimit": True, "exists": False, "others": f"API Fail: {check.get('message')}"
-        }
+        else:
+            return {
+                "name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
+                "rateLimit": False, "exists": False, "emailrecovery": None, "phoneNumber": None, "others": None
+            }
 
     except Exception as e:
         return {

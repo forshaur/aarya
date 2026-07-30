@@ -4,3 +4,7 @@ dist/
 *.egg-info/
 .venv/
 .pytest_cache/
+build/
+cookies.txt
+curl_data.txt
+test_ig.py
